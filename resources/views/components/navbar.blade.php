@@ -1,5 +1,5 @@
 <section class="navbar">
-    <nav class="bg-white border-gray-200 dark:bg-gray-900">
+    <nav class="border-gray-200">
         <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
             <a href="{{ route('home') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
                 <img id="logo-image" src="{{ asset('logo/chrih-red.png') }}" class="h-8" alt="Chrih" />

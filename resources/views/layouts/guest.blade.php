@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../node_modules/tw-elements/dist/js/tw-elements.umd.min.js"></script>
 </head>
 
-<body>
+<body class="bg-white dark:bg-gray-900">
     <div class="font-sans text-gray-900 antialiased">
         {{ $slot }}
     </div>

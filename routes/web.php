@@ -26,3 +26,17 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+// routes for testing
+Route::get('/shop', function () {
+    return view('products.index');
+})->name('products.shop');
+Route::get('/view-product', function () {
+    return view('products.show');
+})->name('products.show');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/cart', function () {
+        return view('cart.index');
+    })->name('cart');
+});

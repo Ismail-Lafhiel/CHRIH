@@ -69,5 +69,6 @@ setLogoTheme();
 
 // Listen for changes in the system theme and update the logo accordingly
 if (window.matchMedia) {
+    
     window.matchMedia('(prefers-color-scheme: dark)').addListener(setLogoTheme);
 }

@@ -11,7 +11,7 @@ Alpine.start();
 // dark mode
 var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
 var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
-var logoImage = document.getElementById('logo-image'); // Add an ID to your <img> tag
+var logoImages = document.getElementsByClassName('logo-image');
 
 // Change the icons inside the button based on previous settings
 if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -50,6 +50,24 @@ themeToggleBtn.addEventListener('click', function () {
     }
 
     // Update the logo image source based on the current theme
-    logoImage.src = '/logo/chrih-' + (document.documentElement.classList.contains('dark') ? 'white' : 'red') + '.png';
-
+    for (var i = 0; i < logoImages.length; i++) {
+        var logoImage = logoImages[i];
+        logoImage.src = '/logo/chrih-' + (document.documentElement.classList.contains('dark') ? 'white' : 'red') + '.png';
+    }
 });
+function setLogoTheme() {
+    var isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    // Iterate through all logo images and update their sources
+    for (var i = 0; i < logoImages.length; i++) {
+        var logoImage = logoImages[i];
+        logoImage.src = '/logo/chrih-' + (isDarkMode ? 'white' : 'red') + '.png';
+    }
+}
+
+// Call the function to set the initial theme
+setLogoTheme();
+
+// Listen for changes in the system theme and update the logo accordingly
+if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(setLogoTheme);
+}

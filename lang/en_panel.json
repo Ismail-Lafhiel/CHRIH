@@ -76,5 +76,14 @@
     "User": "User",
     "Users": "Users",
     "Description": "Description",
-    "Price": "Price"
+    "Price": "Price",
+    "Discription": "Discription",
+    "Cart": "Cart",
+    "Carts": "Carts",
+    "Id": "Id",
+    "Commande": "Commande",
+    "Commandes": "Commandes",
+    "Product_id": "Product_id",
+    "User_id": "User_id",
+    "Product Name": "Product Name"
 }

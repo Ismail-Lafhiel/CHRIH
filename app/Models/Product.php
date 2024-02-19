@@ -14,4 +14,13 @@ class Product extends Model
         'description',
         'price',
     ];
+
+    public function commandes()
+    {
+        return $this->belongsToMany(Commande::class);
+    }
+    public function cart()
+    {
+        return $this->belongsTo(Cart::class);
+    }
 }

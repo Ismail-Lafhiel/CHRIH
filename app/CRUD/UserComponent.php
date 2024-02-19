@@ -41,8 +41,9 @@ class UserComponent implements CRUDComponent
     {
         return [
             'name' => 'text',
-            'email' => 'email',
-            'password'=> 'password'
+            'email'=>'email',
+            'password' => 'password'
+
         ];
     }
 
@@ -51,9 +52,9 @@ class UserComponent implements CRUDComponent
     public function validationRules()
     {
         return [
-            'name' => 'required',
-            'email' => 'required',
-            'password'=> 'required'
+            'name'=>'required',
+            'email'=>'required',
+            'password'=>'required'
         ];
     }
 

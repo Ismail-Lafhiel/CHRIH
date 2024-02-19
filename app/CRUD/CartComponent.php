@@ -4,9 +4,9 @@ namespace App\CRUD;
 
 use EasyPanel\Contracts\CRUDComponent;
 use EasyPanel\Parsers\Fields\Field;
-use App\Models\Product;
+use App\Models\Cart;
 
-class ProductComponent implements CRUDComponent
+class CartComponent implements CRUDComponent
 {
     // Manage actions in crud
     public $create = true;
@@ -19,19 +19,19 @@ class ProductComponent implements CRUDComponent
 
     public function getModel()
     {
-        return Product::class;
+        return Cart::class;
     }
 
     // which kind of data should be showed in list page
     public function fields()
     {
-        return ['name', 'description', 'price'];
+        return ['id','name', 'description', 'price'];
     }
 
     // Searchable fields, if you dont want search feature, remove it
     public function searchable()
     {
-        return ['name', 'description', 'price'];
+        // return ['id','name', 'description', 'price'];
     }
 
     // Write every fields in your db which you want to have a input
@@ -40,9 +40,7 @@ class ProductComponent implements CRUDComponent
     public function inputs()
     {
         return [
-            'name' => 'text',
-            'description'=>'textarea',
-            'price' => 'number'
+            'product_id' => 'number'
         ];
     }
 
@@ -51,9 +49,8 @@ class ProductComponent implements CRUDComponent
     public function validationRules()
     {
         return [
-            'name' => 'required',
-            'description'=>'required',
-            'price' => 'required' 
+            'product_id' => 'required'
+
         ];
     }
 

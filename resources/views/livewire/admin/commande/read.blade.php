@@ -2,22 +2,22 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header p-0">
-                <h3 class="card-title">{{ __('ListTitle', ['name' => __(\Illuminate\Support\Str::plural('User')) ]) }}</h3>
+                <h3 class="card-title">{{ __('ListTitle', ['name' => __(\Illuminate\Support\Str::plural('Commande')) ]) }}</h3>
 
                 <div class="px-2 mt-4">
 
                     <ul class="breadcrumb mt-3 py-3 px-4 rounded">
                         <li class="breadcrumb-item"><a href="@route(getRouteName().'.home')" class="text-decoration-none">{{ __('Dashboard') }}</a></li>
-                        <li class="breadcrumb-item active">{{ __(\Illuminate\Support\Str::plural('User')) }}</li>
+                        <li class="breadcrumb-item active">{{ __(\Illuminate\Support\Str::plural('Commande')) }}</li>
                     </ul>
 
                     <div class="row justify-content-between mt-4 mb-4">
-                        @if(getCrudConfig('User')->create && hasPermission(getRouteName().'.users.create', 0, 0))
+                        @if(getCrudConfig('Commande')->create && hasPermission(getRouteName().'.commande.create', 0, 0))
                         <div class="col-md-4 right-0">
-                            <a href="@route(getRouteName().'.users.create')" class="btn btn-success">{{ __('CreateTitle', ['name' => __('User') ]) }}</a>
+                            <a href="@route(getRouteName().'.commande.create')" class="btn btn-success">{{ __('CreateTitle', ['name' => __('Commande') ]) }}</a>
                         </div>
                         @endif
-                        @if(getCrudConfig('User')->searchable())
+                        @if(getCrudConfig('Commande')->searchable())
                         <div class="col-md-4">
                             <div class="input-group">
                                 <input type="text" class="form-control" @if(config('easy_panel.lazy_mode')) wire:model.lazy="search" @else wire:model="search" @endif placeholder="{{ __('Search') }}" value="{{ request('search') }}">
@@ -38,24 +38,22 @@
                 <table class="table table-hover table-striped">
                     <thead>
                         <tr>
-                            <th scope="col" style='cursor: pointer' wire:click="sort('name')"> <i class='fa @if($sortType == 'desc' and $sortColumn == 'name') fa-sort-amount-down ml-2 @elseif($sortType == 'asc' and $sortColumn == 'name') fa-sort-amount-up ml-2 @endif'></i> {{ __('Name') }} </th>
-                            <th scope="col" style='cursor: pointer' wire:click="sort('email')"> <i class='fa @if($sortType == 'desc' and $sortColumn == 'email') fa-sort-amount-down ml-2 @elseif($sortType == 'asc' and $sortColumn == 'email') fa-sort-amount-up ml-2 @endif'></i> {{ __('Email') }} </th>
-                            <th scope="col" style='cursor: pointer' wire:click="sort('password')"> <i class='fa @if($sortType == 'desc' and $sortColumn == 'password') fa-sort-amount-down ml-2 @elseif($sortType == 'asc' and $sortColumn == 'password') fa-sort-amount-up ml-2 @endif'></i> {{ __('Password') }} </th>
+                            <th scope="col" style='cursor: pointer' wire:click="sort('user_id')"> <i class='fa @if($sortType == 'desc' and $sortColumn == 'user_id') fa-sort-amount-down ml-2 @elseif($sortType == 'asc' and $sortColumn == 'user_id') fa-sort-amount-up ml-2 @endif'></i> {{ __('User_id') }} </th>
                             
-                            @if(getCrudConfig('User')->delete or getCrudConfig('User')->update)
+                            @if(getCrudConfig('Commande')->delete or getCrudConfig('Commande')->update)
                                 <th scope="col">{{ __('Action') }}</th>
                             @endif
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($users as $user)
-                            @livewire('admin.user.single', [$user], key($user->id))
+                        @foreach($commandes as $commande)
+                            @livewire('admin.commande.single', [$commande], key($commande->id))
                         @endforeach
                     </tbody>
                 </table>
             </div>
             <div class="m-auto pt-3 pr-3">
-                {{ $users->appends(request()->query())->links() }}
+                {{ $commandes->appends(request()->query())->links() }}
             </div>
 
             <div wire:loading wire:target="nextPage,gotoPage,previousPage" class="loader-page"></div>

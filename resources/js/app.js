@@ -74,9 +74,8 @@ if (window.matchMedia) {
 
 
 // ajax
-
-// add to wish list
 $(document).ready(function () {
+    // add to wish list
     $('.addToWishlist').on('click', function (e) {
         e.preventDefault();
         var productId = $(this).data('product-id');
@@ -84,7 +83,7 @@ $(document).ready(function () {
         var csrfToken = $('meta[name="csrf-token"]').attr('content');
 
         $.ajax({
-            type: 'POST', // Ensure this is set to 'POST'
+            type: 'POST',
             url: '/wishlist/add/' + productId,
             data: {
                 _token: csrfToken,
@@ -97,19 +96,65 @@ $(document).ready(function () {
             }
         });
     });
-});
 
-// add to cart
-$(document).ready(function () {
-    $('.addToCart').on('click', function (e) {
+    // Remove from WishList
+    $('.removeFromWishList').on('click', function (e) {
         e.preventDefault();
         var productId = $(this).data('product-id');
 
         var csrfToken = $('meta[name="csrf-token"]').attr('content');
 
         $.ajax({
+            type: 'DELETE',
+            url: '/wishlist/remove/' + productId,
+            data: {
+                _token: csrfToken,
+            },
+            success: function (response) {
+                alert(response.success); // Display a success message
+            },
+            error: function (error) {
+                console.error(error.responseJSON.message); // Display an error message
+            }
+        });
+    });
+
+
+    // add to cart
+    $('.addToCart').on('click', function (e) {
+        e.preventDefault();
+        var productId = $(this).data('product-id');
+    
+        var csrfToken = $('meta[name="csrf-token"]').attr('content');
+    
+        $.ajax({
             type: 'POST',
             url: '/cart/add/' + productId,
+            data: {
+                _token: csrfToken,
+            },
+            success: function (response) {
+                alert(response.success); // Display a success message
+            },
+            error: function (error) {
+                var errorMessage = (error.responseJSON && error.responseJSON.error) ? error.responseJSON.error : 'An error occurred.';
+                console.error(errorMessage);
+                alert(errorMessage);
+            }
+        });
+    });
+
+
+    // Remove from Cart
+    $('.removeFromCart').on('click', function (e) {
+        e.preventDefault();
+        var productId = $(this).data('product-id');
+
+        var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            type: 'DELETE',
+            url: '/cart/remove/' + productId,
             data: {
                 _token: csrfToken,
             },

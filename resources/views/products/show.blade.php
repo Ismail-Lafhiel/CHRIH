@@ -97,7 +97,7 @@
                                 <p class="text-xs dark:text-gray-400 ">(2 customer reviews)</p>
                             </div>
                             <p class="max-w-md mb-8 text-gray-700 dark:text-gray-400">
-                                {{ $product->description }}
+                                {!! $product->description !!}
                             </p>
                             <p class="inline-block mb-8 text-4xl font-bold text-gray-700 dark:text-gray-400 ">
                                 <span>${{ $product->price }}</span>
@@ -161,8 +161,8 @@
                         </div>
                         <div class="flex flex-wrap items-center -mx-4 ">
                             <div class="w-full px-4 mb-4 lg:w-1/2 lg:mb-0">
-                                <button
-                                    class="flex items-center justify-center w-full p-4 text-red-500 border border-red-500 rounded-md dark:text-gray-200 dark:border-red-600 hover:bg-red-600 hover:border-red-600 hover:text-gray-100 dark:bg-red-600 dark:hover:bg-red-700 dark:hover:border-red-700 dark:hover:text-gray-300">
+                                <button data-product-id="{{ $product->id }}"
+                                    class="addToCart flex items-center justify-center w-full p-4 text-red-500 border border-red-500 rounded-md dark:text-gray-200 dark:border-red-600 hover:bg-red-600 hover:border-red-600 hover:text-gray-100 dark:bg-red-600 dark:hover:bg-red-700 dark:hover:border-red-700 dark:hover:text-gray-300">
                                     Add to Cart
                                 </button>
                             </div>

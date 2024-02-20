@@ -138,7 +138,10 @@
                     </div>
                 </div>
             </nav>
-            <x-store-cards />
+            @foreach ($products as $product)
+                <x-store-cards :productId='$product->id' :productName='$product->name' :productDescription='$product->description' :productPrice='$product->price'
+                    :productImage='$product->product_image' />
+            @endforeach
         </div>
     </section>
     <x-footer />

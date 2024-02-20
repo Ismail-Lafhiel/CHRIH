@@ -40,10 +40,7 @@ class ProductComponent implements CRUDComponent
     public function inputs()
     {
         return [
-            'name' => 'text',
-            'description' => 'textarea',
-            'price' => 'number',
-            'product_image' => 'file',
+            'name' => 'text', 'description' => 'ckeditor', 'price' => 'number', 'product_image' => 'file'
         ];
     }
 
@@ -51,16 +48,10 @@ class ProductComponent implements CRUDComponent
     // It uses Laravel validation system
     public function validationRules()
     {
-        $rules = [
-            'name' => 'required|string',
-            'description' => 'required|string',
-            'price' => 'required|numeric',
-        ];
-        if (request()->hasFile('product_image')) {
-            $rules['product_image'] = 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
-        }
+        return [
 
-        return $rules;
+            'name' => 'required', 'description' => 'required', 'price' => 'required', 'product_image' => 'required'
+        ];
     }
 
     // Where files will store for inputs

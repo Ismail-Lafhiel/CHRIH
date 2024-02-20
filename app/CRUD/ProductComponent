@@ -1,0 +1,16 @@
+public function inputs()
+    {
+        return [
+            'name' => 'text', 'description' => 'ckeditor', 'price' => 'number', 'product_image' => 'file'
+        ];
+    }
+
+    // Validation in update and create actions
+    // It uses Laravel validation system
+    public function validationRules()
+    {
+        return [
+
+            'name' => 'required', 'description' => 'required', 'price' => 'required', 'product_image' => 'required'
+        ];
+    }

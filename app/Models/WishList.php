@@ -11,13 +11,13 @@ class WishList extends Model
 
     protected $table = 'wishlists';
 
-    protected $fillable =[
+    protected $fillable = [
         'product_id',
         'user_id'
     ];
 
-    public function products(){
-        return $this->hasMany(Product::class);
+    public function products()
+    {
+        return $this->belongsToMany(Product::class);
     }
-
 }

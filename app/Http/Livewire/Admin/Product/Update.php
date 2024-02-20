@@ -18,9 +18,10 @@ class Update extends Component
     public $product_image;
     
     protected $rules = [
-        'name' => 'required|string',
-        'description' => 'required|string',
-        'price' => 'required|numeric',        
+        'name' => 'required',
+        'description' => 'required',
+        'price' => 'required',
+        'product_image' => 'required',        
     ];
 
     public function mount(Product $Product){

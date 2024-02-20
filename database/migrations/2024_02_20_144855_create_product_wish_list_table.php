@@ -13,9 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('carts', function (Blueprint $table) {
+        Schema::create('product_wish_list', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('wish_list_id');
+            $table->unsignedBigInteger('product_id');
             $table->timestamps();
+    
+            // Foreign keys
+            $table->foreign('wish_list_id')->references('id')->on('wishlists')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
 
@@ -26,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('carts');
+        Schema::dropIfExists('product_wish_list');
     }
 };

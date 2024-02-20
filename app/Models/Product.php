@@ -20,12 +20,12 @@ class Product extends Model
     {
         return $this->belongsToMany(Commande::class);
     }
-    public function cart()
+    public function carts()
     {
-        return $this->belongsTo(Cart::class);
+        return $this->belongsToMany(Cart::class);
     }
-    public function wishlist()
+    public function wishlists()
     {
-        return $this->belongsTo(WishList::class);
+        return $this->belongsToMany(WishList::class);
     }
 }

@@ -21,8 +21,23 @@
             </div>
             <!-- Description Input -->
             <div class='form-group'>
-                <label for='input-description' class='col-sm-2 control-label '> {{ __('Description') }}</label>
-                <textarea id="input-description" wire:model.lazy='description' class="form-control  @error('description') is-invalid @enderror" placeholder='' autocomplete='on'></textarea>
+                <label for='editor-description' class='col-sm-2 control-label '> {{ __('Description') }}</label>
+                <div wire:ignore>
+                    <textarea class='form-control ckeditor ' id='editor-description' wire:model='description'></textarea>
+                </div>
+                <script>
+                    ClassicEditor.create(document.querySelector('#editor-description'), {
+                        editorplaceholder: '',
+                    @if(config('easy_panel.rtl_mode'))
+                        language: 'fa'
+                    @endif
+                    }).then(editor => {
+                        editor.setData('{!! $description !!}');
+                        editor.model.document.on('change:data', () => {
+                            @this.description = editor.getData()
+                        });
+                    });
+                </script>
                 @error('description') <div class='invalid-feedback'>{{ $message }}</div> @enderror
             </div>
             <!-- Price Input -->

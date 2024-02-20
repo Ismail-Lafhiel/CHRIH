@@ -71,3 +71,54 @@ setLogoTheme();
 if (window.matchMedia) {
     window.matchMedia('(prefers-color-scheme: dark)').addListener(setLogoTheme);
 }
+
+
+// ajax
+
+// add to wish list
+$(document).ready(function () {
+    $('.addToWishlist').on('click', function (e) {
+        e.preventDefault();
+        var productId = $(this).data('product-id');
+
+        var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            type: 'POST', // Ensure this is set to 'POST'
+            url: '/wishlist/add/' + productId,
+            data: {
+                _token: csrfToken,
+            },
+            success: function (response) {
+                alert(response.success); // Display a success message
+            },
+            error: function (error) {
+                console.error(error.responseJSON.message); // Display an error message
+            }
+        });
+    });
+});
+
+// add to cart
+$(document).ready(function () {
+    $('.addToCart').on('click', function (e) {
+        e.preventDefault();
+        var productId = $(this).data('product-id');
+
+        var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            type: 'POST',
+            url: '/cart/add/' + productId,
+            data: {
+                _token: csrfToken,
+            },
+            success: function (response) {
+                alert(response.success); // Display a success message
+            },
+            error: function (error) {
+                console.error(error.responseJSON.message); // Display an error message
+            }
+        });
+    });
+});

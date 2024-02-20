@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\WishListController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,15 +31,18 @@ Route::middleware([
 });
 
 // routes for testing
-Route::get('/shop', function () {
-    return view('products.index');
-})->name('products.shop');
-Route::get('/view-product', function () {
-    return view('products.show');
-})->name('products.show');
+Route::get('/shop', [ProductController::class, 'index'])->name('products.shop');
+Route::get('/view-product/{product}', [ProductController::class, 'show'])->name('products.show');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/cart', function () {
         return view('cart.index');
-    })->name('cart');
+    })->name('cart.index');
+    Route::get('/wishlist', function () {
+        return view('wishlist.index');
+    })->name('wishlist.index');
+    Route::post('/wishlist/add/{product}', [WishListController::class, 'addToWishlist'])->name('wishlist.add');
+    Route::post('/cart/add/{product}', [CartController::class, 'addToCart'])->name('cart.add');
 });
+
+//

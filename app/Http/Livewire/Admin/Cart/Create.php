@@ -10,10 +10,9 @@ class Create extends Component
 {
     use WithFileUploads;
 
-    public $product_id;
     
     protected $rules = [
-        'product_id' => 'required',        
+        
     ];
 
     public function updated($input)
@@ -29,7 +28,6 @@ class Create extends Component
         $this->dispatchBrowserEvent('show-message', ['type' => 'success', 'message' => __('CreatedMessage', ['name' => __('Cart') ])]);
         
         Cart::create([
-            'product_id' => $this->product_id,
             'user_id' => auth()->id(),
         ]);
 

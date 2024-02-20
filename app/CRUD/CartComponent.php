@@ -25,13 +25,13 @@ class CartComponent implements CRUDComponent
     // which kind of data should be showed in list page
     public function fields()
     {
-        return ['id','name', 'description', 'price'];
+        return [];
     }
 
     // Searchable fields, if you dont want search feature, remove it
     public function searchable()
     {
-        // return ['id','name', 'description', 'price'];
+        return [];
     }
 
     // Write every fields in your db which you want to have a input
@@ -39,19 +39,14 @@ class CartComponent implements CRUDComponent
     // "password", "number", "email", "select", "date", "datetime", "time"
     public function inputs()
     {
-        return [
-            'product_id' => 'number'
-        ];
+        return [];
     }
 
     // Validation in update and create actions
     // It uses Laravel validation system
     public function validationRules()
     {
-        return [
-            'product_id' => 'required'
-
-        ];
+        return [];
     }
 
     // Where files will store for inputs

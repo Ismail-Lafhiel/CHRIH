@@ -13,6 +13,7 @@ class Product extends Model
         'name',
         'description',
         'price',
+        'product_image'
     ];
 
     public function commandes()
@@ -22,5 +23,9 @@ class Product extends Model
     public function cart()
     {
         return $this->belongsTo(Cart::class);
+    }
+    public function wishlist()
+    {
+        return $this->belongsTo(WishList::class);
     }
 }

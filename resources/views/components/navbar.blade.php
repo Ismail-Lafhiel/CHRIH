@@ -99,10 +99,10 @@
                             aria-current="page">Shop</a>
                     </li>
                     <li>
-                        <a href="" class="text-gray-900 dark:text-white hover:underline">Wish List</a>
+                        <a href="{{route('wishlist.index')}}" class="text-gray-900 dark:text-white hover:underline">Wish List</a>
                     </li>
                     <li>
-                        <a href="{{ route('cart') }}" class="text-gray-900 dark:text-white hover:underline">Cart</a>
+                        <a href="{{ route('cart.index') }}" class="text-gray-900 dark:text-white hover:underline">Cart</a>
                     </li>
                 </ul>
             </div>

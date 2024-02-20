@@ -32,7 +32,8 @@
                 </a>
                 <a href="#"
                     class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
-                    <svg class="mr-2 -ml-1 w-5 h-5 dark:fill-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                    <svg class="mr-2 -ml-1 w-5 h-5 dark:fill-gray-400" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512">
                         <path
                             d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
                     </svg>
@@ -103,6 +104,42 @@
                 data-carousel-slide-to="4"></button>
         </div>
     </section>
-    <x-store-cards />
+    <section>
+        <div class="container mx-auto flex items-center flex-wrap pt-4 pb-12">
+
+            <nav id="store" class="w-full z-30 top-0 px-6 py-1">
+                <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-2 py-3">
+
+                    <a class="text-4xl font-extrabold dark:text-white text-center" href="#">
+                        Store
+                    </a>
+
+                    <div class="flex items-center" id="store-nav-content">
+
+                        <a class="pl-3 inline-block no-underline hover:text-black dark:text-white dark:hover:text-gray-300"
+                            href="#">
+                            <svg class="fill-current hover:text-black dark:hover:text-gray-300"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24">
+                                <path d="M7 11H17V13H7zM4 7H20V9H4zM10 15H14V17H10z" />
+                            </svg>
+                        </a>
+
+                        <a class="pl-3 inline-block no-underline hover:text-black dark:text-white dark:hover:text-gray-300"
+                            href="#">
+                            <svg class="fill-current hover:text-black dark:hover:text-gray-300"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M10,18c1.846,0,3.543-0.635,4.897-1.688l4.396,4.396l1.414-1.414l-4.396-4.396C17.365,13.543,18,11.846,18,10 c0-4.411-3.589-8-8-8s-8,3.589-8,8S5.589,18,10,18z M10,4c3.309,0,6,2.691,6,6s-2.691,6-6,6s-6-2.691-6-6S6.691,4,10,4z" />
+                            </svg>
+                        </a>
+
+                    </div>
+                </div>
+            </nav>
+            <x-store-cards />
+        </div>
+    </section>
     <x-footer />
 </x-guest-layout>

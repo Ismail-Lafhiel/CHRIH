@@ -15,18 +15,20 @@ class Update extends Component
     public $name;
     public $description;
     public $price;
+    public $product_image;
     
     protected $rules = [
-        'name' => 'required',
-        'description' => 'required',
-        'price' => 'required',        
+        'name' => 'required|string',
+        'description' => 'required|string',
+        'price' => 'required|numeric',        
     ];
 
     public function mount(Product $Product){
         $this->product = $Product;
         $this->name = $this->product->name;
         $this->description = $this->product->description;
-        $this->price = $this->product->price;        
+        $this->price = $this->product->price;
+        $this->product_image = $this->product->product_image;        
     }
 
     public function updated($input)
@@ -41,10 +43,15 @@ class Update extends Component
 
         $this->dispatchBrowserEvent('show-message', ['type' => 'success', 'message' => __('UpdatedMessage', ['name' => __('Product') ]) ]);
         
+        if($this->getPropertyValue('product_image') and is_object($this->product_image)) {
+            $this->product_image = $this->getPropertyValue('product_image')->store('product_image');
+        }
+
         $this->product->update([
             'name' => $this->name,
             'description' => $this->description,
             'price' => $this->price,
+            'product_image' => $this->product_image,
             'user_id' => auth()->id(),
         ]);
     }

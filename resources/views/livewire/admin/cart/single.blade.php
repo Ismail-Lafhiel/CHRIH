@@ -1,8 +1,4 @@
 <tr x-data="{ modalIsOpen : false }">
-    <td class="">{{ $cart->id }}</td>
-    <td class="">{{ $cart->name }}</td>
-    <td class="">{{ $cart->description }}</td>
-    <td class="">{{ $cart->price }}</td>
     
     @if(getCrudConfig('Cart')->delete or getCrudConfig('Cart')->update)
         <td>

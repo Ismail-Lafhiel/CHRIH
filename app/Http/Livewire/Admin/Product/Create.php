@@ -13,11 +13,12 @@ class Create extends Component
     public $name;
     public $description;
     public $price;
+    public $product_image;
     
     protected $rules = [
-        'name' => 'required',
-        'description' => 'required',
-        'price' => 'required',        
+        'name' => 'required|string',
+        'description' => 'required|string',
+        'price' => 'required|numeric',        
     ];
 
     public function updated($input)
@@ -32,10 +33,15 @@ class Create extends Component
 
         $this->dispatchBrowserEvent('show-message', ['type' => 'success', 'message' => __('CreatedMessage', ['name' => __('Product') ])]);
         
+        if($this->getPropertyValue('product_image') and is_object($this->product_image)) {
+            $this->product_image = $this->getPropertyValue('product_image')->store('product_image');
+        }
+
         Product::create([
             'name' => $this->name,
             'description' => $this->description,
             'price' => $this->price,
+            'product_image' => $this->product_image,
             'user_id' => auth()->id(),
         ]);
 

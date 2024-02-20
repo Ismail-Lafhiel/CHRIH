@@ -25,13 +25,13 @@ class ProductComponent implements CRUDComponent
     // which kind of data should be showed in list page
     public function fields()
     {
-        return ['name', 'description', 'price'];
+        return ['name', 'description', 'price', 'product_image'];
     }
 
     // Searchable fields, if you dont want search feature, remove it
     public function searchable()
     {
-        return ['name', 'description', 'price'];
+        return ['name', 'description', 'price', 'product_image'];
     }
 
     // Write every fields in your db which you want to have a input
@@ -41,8 +41,9 @@ class ProductComponent implements CRUDComponent
     {
         return [
             'name' => 'text',
-            'description'=>'textarea',
-            'price' => 'number'
+            'description' => 'textarea',
+            'price' => 'number',
+            'product_image' => 'file',
         ];
     }
 
@@ -50,11 +51,16 @@ class ProductComponent implements CRUDComponent
     // It uses Laravel validation system
     public function validationRules()
     {
-        return [
-            'name' => 'required',
-            'description'=>'required',
-            'price' => 'required' 
+        $rules = [
+            'name' => 'required|string',
+            'description' => 'required|string',
+            'price' => 'required|numeric',
         ];
+        if (request()->hasFile('product_image')) {
+            $rules['product_image'] = 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
+        }
+
+        return $rules;
     }
 
     // Where files will store for inputs

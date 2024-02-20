@@ -12,15 +12,14 @@ class Update extends Component
 
     public $cart;
 
-    public $product_id;
     
     protected $rules = [
-        'product_id' => 'required',        
+        
     ];
 
     public function mount(Cart $Cart){
         $this->cart = $Cart;
-        $this->product_id = $this->cart->product_id;        
+        
     }
 
     public function updated($input)
@@ -36,7 +35,6 @@ class Update extends Component
         $this->dispatchBrowserEvent('show-message', ['type' => 'success', 'message' => __('UpdatedMessage', ['name' => __('Cart') ]) ]);
         
         $this->cart->update([
-            'product_id' => $this->product_id,
             'user_id' => auth()->id(),
         ]);
     }

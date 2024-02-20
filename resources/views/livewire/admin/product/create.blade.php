@@ -31,6 +31,15 @@
                 <input type='number' id='input-price' wire:model.lazy='price' class="form-control  @error('price') is-invalid @enderror" placeholder='' autocomplete='on'>
                 @error('price') <div class='invalid-feedback'>{{ $message }}</div> @enderror
             </div>
+            <!-- Product_image Input -->
+            <div class='form-group'>
+                <label for='input-product_image' class='col-sm-2 control-label '> {{ __('Product_image') }}</label>
+                <input type='file' id='input-product_image' wire:model='product_image' class="form-control-file  @error('product_image') is-invalid @enderror">
+                @if($product_image and !$errors->has('product_image') and $product_image instanceof Illuminate\Http\UploadedFile and $product_image->isPreviewable())
+                    <a href="{{ $product_image->temporaryUrl() }}" target="_blank"><img width="200" height="200" class="mt-3 img-fluid shadow" src="{{ $product_image->temporaryUrl() }}" alt=""></a>
+                @endif
+                @error('product_image') <div class='invalid-feedback'>{{ $message }}</div> @enderror
+            </div>
 
         </div>
 

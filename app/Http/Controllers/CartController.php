@@ -111,7 +111,7 @@ class CartController extends Controller
         if ($cartItem->pivot->quantity > 1) {
             $user->cart->products()->updateExistingPivot($productId, ['quantity' => $cartItem->pivot->quantity - 1]);
         } else {
-            // Remove the item from the cart if quantity is 1 
+            // Remove the item from the cart if quantity is 1  
             $user->cart->products()->detach($productId);
             return response()->json(['newQuantity' => 0, 'total' => $this->calculateTotal($user->cart), 'success' => true, 'remove' => true]);
         }

@@ -101,10 +101,8 @@
                             </p>
                             <p class="inline-block mb-8 text-4xl font-bold text-gray-700 dark:text-gray-400 ">
                                 <span>${{ $product->price }}</span>
-                                <span
-                                    class="text-base font-normal text-gray-500 line-through dark:text-gray-400">$1500.99</span>
                             </p>
-                            <p class="text-green-600 dark:text-green-300 ">7 in stock</p>
+                            <p class="text-green-600 dark:text-green-300 ">{{$product->stock}} in stock</p>
                         </div>
                         <div class="flex items-center mb-8">
                             <h2 class="w-16 mr-6 text-xl font-bold dark:text-gray-400">

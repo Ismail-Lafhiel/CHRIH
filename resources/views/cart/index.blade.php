@@ -4,7 +4,7 @@
         <div class="justify-center flex-1 px-4 py-6 mx-auto max-w-7xl lg:py-4 md:px-6">
             <div class="p-8 bg-gray-50 dark:bg-gray-800">
                 <h2 class="mb-8 text-4xl font-bold dark:text-gray-400">Your Cart</h2>
-                <div class="flex flex-wrap -mx-4">
+                <div class="flex flex-wrap -mx-4" id="cart-container">
                     <div class="w-full px-4 mb-8 xl:w-8/12 xl:mb-0">
                         <div class="flex flex-wrap items-center mb-6 -mx-4 md:mb-8">
                             <div class="w-full md:block hidden px-4 mb-6 md:w-4/6 lg:w-6/12 md:mb-0">
@@ -21,11 +21,12 @@
                             </div>
                         </div>
                         <div class="py-4 mb-8 border-t border-b border-gray-200 dark:border-gray-700">
-                            @if ($cartItems->isEmpty())
+                            @if (empty($cartItems))
                                 <p>Your cart is empty.</p>
                             @else
                                 @foreach ($cartItems as $cartItem)
-                                    <div class="flex flex-wrap items-center mb-6 -mx-4 md:mb-8">
+                                    <div class="flex flex-wrap items-center mb-6 -mx-4 md:mb-8"
+                                        data-product-id="{{ $cartItem->id }}">
                                         <div class="w-full px-4 mb-6 md:w-4/6 lg:w-6/12 md:mb-0">
                                             <div class="flex flex-wrap items-center -mx-4">
                                                 <div class="w-full px-4 mb-3 md:w-1/3">
@@ -41,16 +42,16 @@
                                             </div>
                                         </div>
                                         <div class="hidden px-4 lg:block lg:w-2/12">
-                                            <p class="text-lg font-bold text-red-500 dark:text-gray-400">
+                                            <p class="text-lg font-bold text-red-500 dark:text-gray-400 product-price">
                                                 ${{ $cartItem->price }}</p>
-                                            <span
-                                                class="text-xs text-gray-500 line-through dark:text-gray-400">$1500</span>
                                         </div>
 
                                         <div class="w-auto px-4 md:w-1/6 lg:w-2/12 ">
                                             <div
                                                 class="inline-flex items-center px-4 font-semibold text-gray-500 border border-gray-200 rounded-md dark:border-gray-700 ">
-                                                <button class="py-2 hover:text-gray-700 dark:text-gray-400">
+                                                <button
+                                                    class="decrement-btn py-2 hover:text-gray-700 dark:text-gray-400"
+                                                    data-product-id="{{ $cartItem->id }}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                         height="16" fill="currentColor" class="bi bi-dash"
                                                         viewBox="0 0 16 16">
@@ -60,9 +61,12 @@
                                                     </svg>
                                                 </button>
                                                 <input type="number"
-                                                    class="w-12 px-2 py-4 text-center border-0 rounded-md dark:bg-gray-800 bg-gray-50 dark:text-gray-400 md:text-right"
-                                                    placeholder="1">
-                                                <button class="py-2 hover:text-gray-700 dark:text-gray-400">
+                                                    class="w-12 px-2 py-4 text-center border-0 rounded-md dark:bg-gray-800 bg-gray-50 dark:text-gray-400 quantity-input"
+                                                    data-product-id="{{ $cartItem->id }}"
+                                                    value="{{ $cartItem->pivot->quantity }}" readonly>
+                                                <button
+                                                    class="increment-btn py-2 hover:text-gray-700 dark:text-gray-400"
+                                                    data-product-id="{{ $cartItem->id }}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                         height="16" fill="currentColor" class="bi bi-plus"
                                                         viewBox="0 0 16 16">
@@ -73,9 +77,12 @@
                                                 </button>
                                             </div>
                                         </div>
-                                        <div class="w-auto px-4 text-right md:w-1/6 lg:w-2/12 ">
-                                            <p class="text-lg font-bold text-red-500 dark:text-gray-400">$99.00</p>
-                                        </div>
+                                        <div class="w-auto px-4 text-right md:w-1/6 lg:w-2/12">
+                                            <p class="text-lg font-bold text-red-500 dark:text-gray-400 product-subtotal"
+                                               data-product-id="{{ $cartItem->id }}" data-product-price="{{ $cartItem->price }}">
+                                                ${{ number_format($cartItem->price * $cartItem->pivot->quantity, 2) }}
+                                            </p>
+                                        </div>                                        
                                     </div>
                                 @endforeach
                             @endif
@@ -87,7 +94,8 @@
                             <div
                                 class="flex items-center justify-between pb-4 mb-4 border-b border-gray-300 dark:border-gray-700 ">
                                 <span class="text-gray-700 dark:text-gray-400">Subtotal</span>
-                                <span class="text-xl font-bold text-gray-700 dark:text-gray-400 ">$99</span>
+                                <span
+                                    class="text-xl font-bold text-gray-700 dark:text-gray-400 order-total-display">$0.00</span>
                             </div>
                             <div class="flex items-center justify-between pb-4 mb-4 ">
                                 <span class="text-gray-700 dark:text-gray-400 ">Shipping</span>
@@ -95,7 +103,8 @@
                             </div>
                             <div class="flex items-center justify-between pb-4 mb-4 ">
                                 <span class="text-gray-700 dark:text-gray-400">Order Total</span>
-                                <span class="text-xl font-bold text-gray-700 dark:text-gray-400">$99.00</span>
+                                <span
+                                    class="text-xl font-bold text-gray-700 dark:text-gray-400 order-total-display">$0.00</span>
                             </div>
                             <h2 class="text-lg text-gray-500 dark:text-gray-400">We offer:</h2>
                             <div class="flex items-center mb-4 ">
@@ -122,4 +131,12 @@
             </div>
         </div>
     </section>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var productIds = document.querySelectorAll('[data-product-id]');
+            productIds.forEach(function(element) {
+                console.log('Product ID:', element.dataset.productId);
+            });
+        });
+    </script>
 </x-app-layout>

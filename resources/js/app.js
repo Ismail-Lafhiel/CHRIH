@@ -124,9 +124,9 @@ $(document).ready(function () {
     $('.addToCart').on('click', function (e) {
         e.preventDefault();
         var productId = $(this).data('product-id');
-    
+
         var csrfToken = $('meta[name="csrf-token"]').attr('content');
-    
+
         $.ajax({
             type: 'POST',
             url: '/cart/add/' + productId,
@@ -166,4 +166,66 @@ $(document).ready(function () {
             }
         });
     });
+
+    // product price and quantity
+    $(document).on('click', '.increment-btn, .decrement-btn', function () {
+        var productId = $(this).data('product-id');
+        var action = $(this).hasClass('increment-btn') ? 'increment' : 'decrement';
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: '/cart/' + action + '-quantity',
+            data: {
+                product_id: productId
+            },
+            success: function (response) {
+                console.log(response); // Log the response to the console for debugging
+
+                if (response.newQuantity !== undefined) {
+                    // Update the UI
+                    updateQuantityUI(productId, response.newQuantity);
+                    updateSubtotalUI(productId);
+                    updateTotalUI(response.total);
+
+                    if (action === 'decrement' && response.newQuantity === 0) {
+                        removeCartItem(productId);
+                        location.reload();
+                    }
+                } else {
+                    console.error(action.charAt(0).toUpperCase() + action.slice(1) + ' failed. Error: ' + response.error);
+                }
+            },
+            error: function (error) {
+                console.error(action.charAt(0).toUpperCase() + action.slice(1) + ' failed. Error: ' + error.responseText);
+            }
+        });
+    });
+
+    function updateQuantityUI(productId, newQuantity) {
+        $('.quantity-input[data-product-id="' + productId + '"]').val(newQuantity);
+    }
+
+    function updateSubtotalUI(productId) {
+        var quantity = parseInt($('.quantity-input[data-product-id="' + productId + '"]').val());
+        var price = parseFloat($('.product-subtotal[data-product-id="' + productId + '"]').data('product-price'));
+
+        console.log('Price:', price); // Add this line to log the price to the console
+
+        var subtotal = (quantity * price).toFixed(2);
+        $('.product-subtotal[data-product-id="' + productId + '"]').text('$' + subtotal);
+    }
+    function updateTotalUI(total) {
+        $('.order-total-display').text('$' + total.toFixed(2));
+    }
+
+    function removeCartItem(productId) {
+        $('.flex[data-product-id="' + productId + '"]').remove();
+    }
+
 });

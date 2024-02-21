@@ -42,8 +42,9 @@ Route::middleware(['auth'])->group(function () {
 
     //cart
     Route::post('/cart/add/{product}', [CartController::class, 'addToCart'])->name('cart.add');
-    Route::delete('/cart/remove/{product}', [CartController::class, 'removeFromCart'])->name('cart.remove');
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/increment-quantity', [CartController::class, 'incrementQuantity'])->name('cart.increment-quantity');
+    Route::post('/cart/decrement-quantity', [CartController::class, 'decrementQuantity'])->name('cart.decrement-quantity');
 });
 
 //

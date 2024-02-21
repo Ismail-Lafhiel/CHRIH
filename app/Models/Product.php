@@ -13,7 +13,8 @@ class Product extends Model
         'name',
         'description',
         'price',
-        'product_image'
+        'product_image',
+        'count'
     ];
 
     public function commandes()
@@ -22,7 +23,7 @@ class Product extends Model
     }
     public function carts()
     {
-        return $this->belongsToMany(Cart::class);
+        return $this->belongsToMany(Cart::class, "cart_product")->withPivot('quantity');;
     }
     public function wishlists()
     {

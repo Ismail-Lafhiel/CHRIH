@@ -3,6 +3,7 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\StripeController;
 use App\Http\Controllers\WishListController;
 use Illuminate\Support\Facades\Route;
 
@@ -45,6 +46,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::post('/cart/increment-quantity', [CartController::class, 'incrementQuantity'])->name('cart.increment-quantity');
     Route::post('/cart/decrement-quantity', [CartController::class, 'decrementQuantity'])->name('cart.decrement-quantity');
-});
 
-//
+    // payment routes
+    Route::get('/checkout', [StripeController::class, 'checkout'])->name('checkout');
+    Route::post('/session', [StripeController::class, 'session'])->name('session');
+    Route::get('/success', [StripeController::class, 'success'])->name('success');
+});

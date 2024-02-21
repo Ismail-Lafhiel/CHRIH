@@ -20,6 +20,7 @@
     "dependencies": {
         "flowbite": "^2.3.0",
         "font-awesome": "^4.7.0",
+        "sweetalert2": "^11.10.5",
         "tw-elements": "^1.1.0"
     }
 }

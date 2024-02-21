@@ -89,10 +89,18 @@ $(document).ready(function () {
                 _token: csrfToken,
             },
             success: function (response) {
-                alert(response.success); // Display a success message
+                Swal.fire({
+                    title: "Success",
+                    text: response.success,
+                    icon: "success"
+                });
             },
             error: function (error) {
-                console.error(error.responseJSON.message); // Display an error message
+                Swal.fire({
+                    title: "Error",
+                    text: error.responseJSON.message,
+                    icon: "error"
+                });
             }
         });
     });
@@ -111,10 +119,18 @@ $(document).ready(function () {
                 _token: csrfToken,
             },
             success: function (response) {
-                alert(response.success); // Display a success message
+                Swal.fire({
+                    title: "Success",
+                    text: response.success,
+                    icon: "success"
+                });
             },
             error: function (error) {
-                console.error(error.responseJSON.message); // Display an error message
+                Swal.fire({
+                    title: "Error",
+                    text: error.responseJSON.message,
+                    icon: "error"
+                });
             }
         });
     });
@@ -134,39 +150,21 @@ $(document).ready(function () {
                 _token: csrfToken,
             },
             success: function (response) {
-                alert(response.success); // Display a success message
+                Swal.fire({
+                    title: "Success",
+                    text: response.success,
+                    icon: "success"
+                });
             },
             error: function (error) {
-                var errorMessage = (error.responseJSON && error.responseJSON.error) ? error.responseJSON.error : 'An error occurred.';
-                console.error(errorMessage);
-                alert(errorMessage);
+                Swal.fire({
+                    title: "Error",
+                    text: error.responseJSON.message,
+                    icon: "error"
+                });
             }
         });
     });
-
-
-    // Remove from Cart
-    $('.removeFromCart').on('click', function (e) {
-        e.preventDefault();
-        var productId = $(this).data('product-id');
-
-        var csrfToken = $('meta[name="csrf-token"]').attr('content');
-
-        $.ajax({
-            type: 'DELETE',
-            url: '/cart/remove/' + productId,
-            data: {
-                _token: csrfToken,
-            },
-            success: function (response) {
-                alert(response.success); // Display a success message
-            },
-            error: function (error) {
-                console.error(error.responseJSON.message); // Display an error message
-            }
-        });
-    });
-
     // product price and quantity
     $(document).on('click', '.increment-btn, .decrement-btn', function () {
         var productId = $(this).data('product-id');
@@ -227,5 +225,47 @@ $(document).ready(function () {
     function removeCartItem(productId) {
         $('.flex[data-product-id="' + productId + '"]').remove();
     }
+
+    // checkout
+    document.addEventListener('DOMContentLoaded', function () {
+        var stripe = Stripe('your-publishable-key');
+        var checkoutButton = document.getElementById('checkout-button');
+
+        checkoutButton.addEventListener('click', function () {
+            fetch('/stripe/session', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                },
+                body: JSON.stringify({
+                    productname: 'Your Product Name', // Change this dynamically
+                    total: calculateTotalAmount(), // Implement a function to calculate total dynamically
+                }),
+            })
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (session) {
+                    return stripe.redirectToCheckout({ sessionId: session.id });
+                })
+                .then(function (result) {
+                    if (result.error) {
+                        alert(result.error.message);
+                    }
+                })
+                .catch(function (error) {
+                    console.error('Error:', error);
+                });
+        });
+
+        // Add a function to calculate the total amount dynamically
+        function calculateTotalAmount() {
+            // Implement your logic to calculate the total amount based on cart items
+            // You can iterate through cartItems and calculate the total amount
+            // For simplicity, let's assume there's a global variable named 'totalAmount'
+            return totalAmount;
+        }
+    });
 
 });

@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
@@ -18,13 +16,15 @@ class CartController extends Controller
         $cart = Cart::where('user_id', $user_id)->with('products')->first();
 
         if (!$cart || !is_a($cart->products, 'Illuminate\Database\Eloquent\Collection') || $cart->products->isEmpty()) {
-            return view('cart.index', ['cartItems' => []]);
+            return view('cart.index', ['cartItems' => [], 'totalAmount' => 0]);
         }
 
         $cartItems = $cart->products;
+        $totalAmount = $this->calculateTotal($cart);
 
-        return view('cart.index', compact('cartItems'));
+        return view('cart.index', compact('cartItems', 'totalAmount'));
     }
+
 
 
     public function addToCart($id)
@@ -89,6 +89,7 @@ class CartController extends Controller
             return $product->price * $product->pivot->quantity;
         });
     }
+
 
     public function decrementQuantity(Request $request)
     {

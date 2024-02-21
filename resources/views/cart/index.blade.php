@@ -79,10 +79,11 @@
                                         </div>
                                         <div class="w-auto px-4 text-right md:w-1/6 lg:w-2/12">
                                             <p class="text-lg font-bold text-red-500 dark:text-gray-400 product-subtotal"
-                                               data-product-id="{{ $cartItem->id }}" data-product-price="{{ $cartItem->price }}">
+                                                data-product-id="{{ $cartItem->id }}"
+                                                data-product-price="{{ $cartItem->price }}">
                                                 ${{ number_format($cartItem->price * $cartItem->pivot->quantity, 2) }}
                                             </p>
-                                        </div>                                        
+                                        </div>
                                     </div>
                                 @endforeach
                             @endif
@@ -95,7 +96,7 @@
                                 class="flex items-center justify-between pb-4 mb-4 border-b border-gray-300 dark:border-gray-700 ">
                                 <span class="text-gray-700 dark:text-gray-400">Subtotal</span>
                                 <span
-                                    class="text-xl font-bold text-gray-700 dark:text-gray-400 order-total-display">$0.00</span>
+                                    class="text-xl font-bold text-gray-700 dark:text-gray-400 order-total-display">${{ number_format($totalAmount, 2) }}</span>
                             </div>
                             <div class="flex items-center justify-between pb-4 mb-4 ">
                                 <span class="text-gray-700 dark:text-gray-400 ">Shipping</span>
@@ -104,7 +105,7 @@
                             <div class="flex items-center justify-between pb-4 mb-4 ">
                                 <span class="text-gray-700 dark:text-gray-400">Order Total</span>
                                 <span
-                                    class="text-xl font-bold text-gray-700 dark:text-gray-400 order-total-display">$0.00</span>
+                                    class="text-xl font-bold text-gray-700 dark:text-gray-400 order-total-display">${{ number_format($totalAmount, 2) }}</span>
                             </div>
                             <h2 class="text-lg text-gray-500 dark:text-gray-400">We offer:</h2>
                             <div class="flex items-center mb-4 ">
@@ -121,9 +122,11 @@
                                         alt="" class="object-cover h-16 mr-2 w-26">
                                 </a>
                             </div>
-                            <div class="flex items-center justify-between ">
-                                <button
-                                    class="block w-full py-4 font-bold text-center text-gray-100 uppercase bg-red-500 rounded-md hover:bg-red-600">Checkout</button>
+                            <div class="flex items-center justify-between">
+                                <a href="{{ route('checkout') }}"
+                                    class="block w-full py-4 font-bold text-center text-gray-100 uppercase bg-red-500 rounded-md hover:bg-red-600">
+                                    Checkout
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -131,12 +134,4 @@
             </div>
         </div>
     </section>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var productIds = document.querySelectorAll('[data-product-id]');
-            productIds.forEach(function(element) {
-                console.log('Product ID:', element.dataset.productId);
-            });
-        });
-    </script>
 </x-app-layout>

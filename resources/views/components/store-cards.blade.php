@@ -2,7 +2,7 @@
 
 <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
     <a href="{{ route('products.show', $productId) }}">
-        <img class="hover:grow hover:shadow-lg h-44 w-full" src="{{ asset('storage/app/' . $productImage) }}">
+        <img class="hover:grow hover:shadow-lg h-44 w-full" src="{{ asset('product_image/' . $productImage) }}">
         <div class="pt-3 flex items-center justify-between">
             <p class="text-gray-700 dark:text-white">{{ $productName }}</p>
             <a href="#" data-popover-target="popover-wish-list-{{ $productId }}"
@@ -28,7 +28,8 @@
         </div>
         <div class="pt-3 flex items-center justify-between">
             <p class="pt-1 text-gray-900 dark:text-white">{{ $productPrice }} $</p>
-            <a href="#" data-popover-target="popover-to-cart-{{ $productId }}" data-product-id="{{ $productId }}" class="addToCart">
+            <a href="#" data-popover-target="popover-to-cart-{{ $productId }}"
+                data-product-id="{{ $productId }}" class="addToCart">
                 <svg class="h-6 w-6 fill-current text-gray-500 hover:text-black dark:hover:text-white"
                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                     <path

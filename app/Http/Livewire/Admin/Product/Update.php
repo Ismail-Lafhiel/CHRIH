@@ -15,12 +15,14 @@ class Update extends Component
     public $name;
     public $description;
     public $price;
+    public $stock;
     public $product_image;
     
     protected $rules = [
         'name' => 'required',
         'description' => 'required',
         'price' => 'required',
+        'stock' => 'required',
         'product_image' => 'required',        
     ];
 
@@ -29,6 +31,7 @@ class Update extends Component
         $this->name = $this->product->name;
         $this->description = $this->product->description;
         $this->price = $this->product->price;
+        $this->stock = $this->product->stock;
         $this->product_image = $this->product->product_image;        
     }
 
@@ -52,6 +55,7 @@ class Update extends Component
             'name' => $this->name,
             'description' => $this->description,
             'price' => $this->price,
+            'stock' => $this->stock,
             'product_image' => $this->product_image,
             'user_id' => auth()->id(),
         ]);

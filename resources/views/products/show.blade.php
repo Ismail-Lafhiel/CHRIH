@@ -13,28 +13,28 @@
                             <div class="w-1/2 p-2 sm:w-1/4">
                                 <a href="#"
                                     class="block border border-red-300 dark:border-transparent dark:hover:border-red-300 hover:border-red-300">
-                                    <img src="https://i.postimg.cc/PqYpFTfy/pexels-melvin-buezo-2529148.jpg"
+                                    <img src="{{ asset('storage/app/' . $product->product_image) }}"
                                         alt="" class="object-cover w-full lg:h-20">
                                 </a>
                             </div>
                             <div class="w-1/2 p-2 sm:w-1/4">
                                 <a href="#"
                                     class="block border border-transparent dark:border-transparent dark:hover:border-red-300 hover:border-red-300">
-                                    <img src="https://i.postimg.cc/PqYpFTfy/pexels-melvin-buezo-2529148.jpg"
+                                    <img src="{{ asset('storage/app/' . $product->product_image) }}"
                                         alt="" class="object-cover w-full lg:h-20">
                                 </a>
                             </div>
                             <div class="w-1/2 p-2 sm:w-1/4">
                                 <a href="#"
                                     class="block border border-transparent dark:border-transparent dark:hover:border-red-300 hover:border-red-300">
-                                    <img src="https://i.postimg.cc/PqYpFTfy/pexels-melvin-buezo-2529148.jpg"
+                                    <img src="{{ asset('storage/app/' . $product->product_image) }}"
                                         alt="" class="object-cover w-full lg:h-20">
                                 </a>
                             </div>
                             <div class="w-1/2 p-2 sm:w-1/4">
                                 <a href="#"
                                     class="block border border-transparent dark:border-transparent dark:hover:border-red-300 hover:border-red-300">
-                                    <img src="https://i.postimg.cc/PqYpFTfy/pexels-melvin-buezo-2529148.jpg"
+                                    <img src="{{ asset('storage/app/' . $product->product_image) }}"
                                         alt="" class="object-cover w-full lg:h-20">
                                 </a>
                             </div>

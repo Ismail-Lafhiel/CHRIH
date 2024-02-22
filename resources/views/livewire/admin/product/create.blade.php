@@ -46,6 +46,12 @@
                 <input type='number' id='input-price' wire:model.lazy='price' class="form-control  @error('price') is-invalid @enderror" placeholder='' autocomplete='on'>
                 @error('price') <div class='invalid-feedback'>{{ $message }}</div> @enderror
             </div>
+            <!-- Stock Input -->
+            <div class='form-group'>
+                <label for='input-stock' class='col-sm-2 control-label '> {{ __('Stock') }}</label>
+                <input type='number' id='input-stock' wire:model.lazy='stock' class="form-control  @error('stock') is-invalid @enderror" placeholder='' autocomplete='on'>
+                @error('stock') <div class='invalid-feedback'>{{ $message }}</div> @enderror
+            </div>
             <!-- Product_image Input -->
             <div class='form-group'>
                 <label for='input-product_image' class='col-sm-2 control-label '> {{ __('Product_image') }}</label>

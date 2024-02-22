@@ -25,13 +25,13 @@ class ProductComponent implements CRUDComponent
     // which kind of data should be showed in list page
     public function fields()
     {
-        return ['name', 'description', 'price', 'product_image'];
+        return ['name', 'description', 'price', 'product_image', 'stock'];
     }
 
     // Searchable fields, if you dont want search feature, remove it
     public function searchable()
     {
-        return ['name', 'description', 'price', 'product_image'];
+        return ['name', 'description', 'price', 'product_image', 'stock'];
     }
 
     // Write every fields in your db which you want to have a input
@@ -40,7 +40,7 @@ class ProductComponent implements CRUDComponent
     public function inputs()
     {
         return [
-            'name' => 'text', 'description' => 'ckeditor', 'price' => 'number', 'product_image' => 'file'
+            'name' => 'text', 'description' => 'ckeditor', 'price' => 'number', 'stock' => 'number', 'product_image' => 'file'
         ];
     }
 
@@ -50,7 +50,7 @@ class ProductComponent implements CRUDComponent
     {
         return [
 
-            'name' => 'required', 'description' => 'required', 'price' => 'required', 'product_image' => 'required'
+            'name' => 'required', 'description' => 'required', 'price' => 'required', 'stock' => 'required', 'product_image' => 'required'
         ];
     }
 

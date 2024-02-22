@@ -86,5 +86,6 @@
     "Product_id": "Product_id",
     "User_id": "User_id",
     "Product Name": "Product Name",
-    "Product_image": "Product_image"
+    "Product_image": "Product_image",
+    "Stock": "Stock"
 }

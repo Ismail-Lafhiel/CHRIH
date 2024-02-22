@@ -2,7 +2,7 @@
 
 <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
     <a href="{{ route('products.show', $productId) }}">
-        <img class="hover:grow hover:shadow-lg h-44 w-full" src="{{ asset('product_image/' . $productImage) }}">
+        <img class="hover:grow hover:shadow-lg h-44 w-full" src="{{ asset('storage/app/product_image/' . $productImage) }}">
         <div class="pt-3 flex items-center justify-between">
             <p class="text-gray-700 dark:text-white">{{ $productName }}</p>
             <a href="#" data-popover-target="popover-wish-list-{{ $productId }}"

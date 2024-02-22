@@ -12,7 +12,7 @@
                     </ul>
 
                     <div class="row justify-content-between mt-4 mb-4">
-                        @if(getCrudConfig('Product')->create && hasPermission(getRouteName().'.products.create', 0, 0))
+                        @if(getCrudConfig('Product')->create && hasPermission(getRouteName().'.products.create', 1, 1))
                         <div class="col-md-4 right-0">
                             <a href="@route(getRouteName().'.products.create')" class="btn btn-success">{{ __('CreateTitle', ['name' => __('Product') ]) }}</a>
                         </div>
@@ -42,6 +42,7 @@
                             <th scope="col" style='cursor: pointer' wire:click="sort('description')"> <i class='fa @if($sortType == 'desc' and $sortColumn == 'description') fa-sort-amount-down ml-2 @elseif($sortType == 'asc' and $sortColumn == 'description') fa-sort-amount-up ml-2 @endif'></i> {{ __('Description') }} </th>
                             <th scope="col" style='cursor: pointer' wire:click="sort('price')"> <i class='fa @if($sortType == 'desc' and $sortColumn == 'price') fa-sort-amount-down ml-2 @elseif($sortType == 'asc' and $sortColumn == 'price') fa-sort-amount-up ml-2 @endif'></i> {{ __('Price') }} </th>
                             <th scope="col" style='cursor: pointer' wire:click="sort('product_image')"> <i class='fa @if($sortType == 'desc' and $sortColumn == 'product_image') fa-sort-amount-down ml-2 @elseif($sortType == 'asc' and $sortColumn == 'product_image') fa-sort-amount-up ml-2 @endif'></i> {{ __('Product_image') }} </th>
+                            <th scope="col" style='cursor: pointer' wire:click="sort('stock')"> <i class='fa @if($sortType == 'desc' and $sortColumn == 'stock') fa-sort-amount-down ml-2 @elseif($sortType == 'asc' and $sortColumn == 'stock') fa-sort-amount-up ml-2 @endif'></i> {{ __('Stock') }} </th>
                             
                             @if(getCrudConfig('Product')->delete or getCrudConfig('Product')->update)
                                 <th scope="col">{{ __('Action') }}</th>

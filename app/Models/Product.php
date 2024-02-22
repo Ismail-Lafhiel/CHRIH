@@ -14,7 +14,7 @@ class Product extends Model
         'description',
         'price',
         'product_image',
-        'count'
+        'stock'
     ];
 
     public function commandes()

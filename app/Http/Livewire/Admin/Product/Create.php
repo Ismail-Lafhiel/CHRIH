@@ -13,12 +13,14 @@ class Create extends Component
     public $name;
     public $description;
     public $price;
+    public $stock;
     public $product_image;
     
     protected $rules = [
         'name' => 'required',
         'description' => 'required',
         'price' => 'required',
+        'stock' => 'required',
         'product_image' => 'required',        
     ];
 
@@ -42,6 +44,7 @@ class Create extends Component
             'name' => $this->name,
             'description' => $this->description,
             'price' => $this->price,
+            'stock' => $this->stock,
             'product_image' => $this->product_image,
             'user_id' => auth()->id(),
         ]);

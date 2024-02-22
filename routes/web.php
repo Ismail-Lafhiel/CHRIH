@@ -51,4 +51,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/checkout', [StripeController::class, 'checkout'])->name('checkout');
     Route::post('/session', [StripeController::class, 'session'])->name('session');
     Route::get('/success', [StripeController::class, 'success'])->name('success');
+    Route::post('/stripe/webhook', [StripeController::class, 'handleWebhook'])->name('stripe.webhook');
 });

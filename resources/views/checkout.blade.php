@@ -22,7 +22,6 @@
             <p class="order-total-display">Total fees: ${{ number_format($totalAmount, 2) }}</p>
 
             <!-- Other checkout form fields go here -->
-
             <button type="submit" id="checkout-button" class="bg-blue-500 text-white px-4 py-2">
                 Proceed to Payment
             </button>
